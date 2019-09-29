@@ -53,8 +53,6 @@ export class LoginPage implements OnInit {
   onSubmit(form) {
 
     console.log(form);
-    return false;
-
     this.alertService.presentToast("Logged In");
     this.navCtrl.navigateRoot('/menu/first');
 
