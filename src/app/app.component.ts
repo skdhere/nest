@@ -31,6 +31,13 @@ export class AppComponent {
       //this.splashScreen.hide();
       //this.authService.getToken();
     });
+
+    // let status bar overlay webview
+    this.statusBar.overlaysWebView(true);
+
+    // set status bar to white
+    this.statusBar.backgroundColorByHexString('#72b9d7');
+
   }
 
   logout() {

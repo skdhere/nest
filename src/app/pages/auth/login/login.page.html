@@ -2,7 +2,7 @@
   
     <ion-img src="/assets/new_home.gif"></ion-img>
     
-  <form #form="ngForm" (ngSubmit)="login(form)">
+  <form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -11,29 +11,34 @@
           </div>
           <div padding>
             <ion-item>
-              <ion-input
-                name="email"
-                type="email"
-                placeholder="your@email.com"
-                ngModel
-                required
-              ></ion-input>
+              <ion-label position="floating" color="primary">Email</ion-label>
+              <ion-input type="text" formControlName="email"></ion-input>
             </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.email">
+                <div class="error-message" *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+        
             <ion-item>
-              <ion-input
-                name="password"
-                type="password"
-                placeholder="Password"
-                ngModel
-                required
-              ></ion-input>
+              <ion-label position="floating" color="primary">Password</ion-label>
+              <ion-input type="password" formControlName="password"></ion-input>
             </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.password">
+                <div class="error-message" *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
           </div>
           <div padding>
             <ion-button
               size="large"
               type="submit"
-              [disabled]="form.invalid"
+              [disabled]="!validations_form.valid"
               expand="block"
               >Login</ion-button
             >
