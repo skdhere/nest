@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicSelectableComponent } from 'ionic-selectable';
+import { FormGroup } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 class Port {
   public id: number;
@@ -15,6 +17,9 @@ export class DetailsPage implements OnInit {
 
   ports: Port[];
   port: Port;
+	form: FormGroup;
+	submitted: any;
+	readonly FILENAME = 'form1-conf.json';
 
   constructor() {
     this.ports = [
@@ -22,9 +27,13 @@ export class DetailsPage implements OnInit {
       { id: 2, name: 'Vladivostok' },
       { id: 3, name: 'Navlakhi' }
     ];
+
+    this.form = new FormGroup({});
   }
 
   ngOnInit() {
+    
+
   }
 
   portChange(event: {
@@ -32,6 +41,10 @@ export class DetailsPage implements OnInit {
     value: any 
   }) {
     console.log('port:', event.value);
+  }
+
+  saveData() {
+    console.log('Clicked');
   }
 
 }
