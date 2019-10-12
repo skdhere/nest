@@ -14,4 +14,8 @@ export class PostsService {
     return this.http.get(`${this.url}?page=${page}`);
   }
 
+  getRoomTypes(){
+    return this.http.get('https://erosmedows.000webhostapp.com/api/rooms');
+  }
+
 }

@@ -8,23 +8,67 @@
 </ion-header>
  
 <ion-content padding>
+
+
+    <form [formGroup]="form" margin-bottom>
+
+        <ion-item>
+            <ion-label position="floating" color="primary">Name</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+          </ion-item>
+          <div class="validation-errors">
+              <div class="error-message" *ngIf="form.get('name').hasError('required') && (form.get('name').dirty || form.get('name').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> Name is reqired
+              </div>
+          </div>
+      
+          <ion-item>
+              <ion-label position="floating" color="primary">Mobile Number</ion-label>
+              <ion-input type="text" formControlName="mobile_number"></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <div class="error-message" *ngIf="form.get('mobile_number').hasError('required') && (form.get('mobile_number').dirty || form.get('mobile_number').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon> Mobile Number is reqired
+                </div>
+            </div>
+
+            <ion-item>
+                <ion-label position="floating" color="primary">Email ID</ion-label>
+                <ion-input type="text" formControlName="email_id"></ion-input>
+              </ion-item>
+              <div class="validation-errors">
+                  <div class="error-message" *ngIf="form.get('email_id').hasError('required') && (form.get('email_id').dirty || form.get('email_id').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon> Email ID is reqired
+                  </div>
+              </div>
+
+              <ion-item>
+                  <ion-label position="floating" color="primary">Room No</ion-label>
+                  <ion-input type="text" formControlName="room_no"></ion-input>
+                </ion-item>
+                <div class="validation-errors">
+                    <div class="error-message" *ngIf="form.get('room_no').hasError('required') && (form.get('room_no').dirty || form.get('room_no').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon> Room No is reqired
+                    </div>
+                </div>
   
     <ion-item>
-        <ion-label>Port</ion-label>
+        <ion-label>Member Type</ion-label>
         <ionic-selectable
-          [(ngModel)]="port"
-          [items]="ports"
+          formControlName="member_type"
+          [items]="member_types"
           itemValueField="id"
           itemTextField="name"
           [canSearch]="true"
           (onChange)="portChange($event)">
         </ionic-selectable>
       </ion-item>
+      </form>
  
 </ion-content>
 
-<ion-fab vertical="top" horizontal="end" id="fab-position">
-    <ion-fab-button color="button"  >
-      <ion-icon name="checkmark" (click)="saveData();"></ion-icon>
+  <ion-fab vertical="top" horizontal="end" id="fab-position">
+    <ion-fab-button color="button" [disabled]="!form.valid" >
+      <ion-icon name="checkmark" (click)="saveData(form.value);"></ion-icon>
     </ion-fab-button>
   </ion-fab>
